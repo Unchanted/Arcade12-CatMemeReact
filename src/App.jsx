@@ -73,15 +73,15 @@ function App() {
 
   return (
 
-    <div className="min-h-screen flex overflow-hidden bg-slate-900 -z-20 flex-col items-center justify-center p-4">
+    <div className="min-h-screen flex overflow-hidden bg-slate-900 flex-col items-center justify-center p-4">
     <div>
       <Boxes />
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl">
-        <h1 className="text-4xl font-bold mb-4 text-center text-gray-800">Cat Meme Generator</h1>
-        <p className="text-center text-gray-600 mb-6">Create hilarious cat memes with just one click!</p>
         <BackgroundGradient className = "rounded-[22px] max-w-sm p4 sm:p-10 bg-white dark:bg-zinc900">
         {meme.imageUrl && (
           <div className="relative mb-6 overflow-hidden rounded-lg" style={{maxHeight: '70vh'}}>
+            <h1 className="text-4xl font-bold mb-4 text-center text-gray-800">Cat Meme Generator</h1>
+            <p className="text-center text-gray-600 mb-6">Create hilarious cat memes with just one click!</p>
             <img 
               src={meme.imageUrl} 
               alt="Random cat" 
