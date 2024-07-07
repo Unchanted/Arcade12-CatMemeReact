@@ -72,8 +72,10 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen flex overflow-hidden bg-slate-900 flex-col items-center justify-center p-4">
-    <Boxes />
+
+    <div className="min-h-screen flex overflow-hidden bg-slate-900 -z-20 flex-col items-center justify-center p-4">
+    <div>
+      <Boxes />
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl">
         <h1 className="text-4xl font-bold mb-4 text-center text-gray-800">Cat Meme Generator</h1>
         <p className="text-center text-gray-600 mb-6">Create hilarious cat memes with just one click!</p>
@@ -117,6 +119,7 @@ function App() {
           Memes generated: <span className="font-bold">{memeCount}</span>
         </p>
         </BackgroundGradient>
+      </div>
       </div>
     </div>
   );
