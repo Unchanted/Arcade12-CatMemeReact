@@ -1,4 +1,7 @@
+"use client";
 import React, { useState, useEffect } from 'react';
+import { Boxes } from "./components/ui/background-boxes.tsx";
+import {cn} from "./utils/cn.ts";
 import './index.css'; 
 
 const catPhrases = [
@@ -35,7 +38,7 @@ const catPhrases = [
 ];
 
 function App() {
-  const [meme, setMeme] = useState({ imageUrl: '', phrase: '' });
+  const [meme, setMeme] = useState({ imageUrl: '', phrase: '', width: 0, height: 0 });
   const [memeCount, setMemeCount] = useState(0);
   const [customText, setCustomText] = useState('');
 
@@ -44,7 +47,19 @@ function App() {
       const response = await fetch('https://api.thecatapi.com/v1/images/search');
       const data = await response.json();
       const randomPhrase = catPhrases[Math.floor(Math.random() * catPhrases.length)];
-      setMeme({ imageUrl: data[0].url, phrase: randomPhrase });
+      
+      // Create a new Image object to get the dimensions
+      const img = new Image();
+      img.onload = () => {
+        setMeme({ 
+          imageUrl: data[0].url, 
+          phrase: randomPhrase,
+          width: img.width,
+          height: img.height
+        });
+      };
+      img.src = data[0].url;
+      
       setMemeCount(prevCount => prevCount + 1);
     } catch (error) {
       console.error('Error fetching cat image:', error);
@@ -56,14 +71,19 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-3xl w-full">
+    <div className="min-h-screen flex overflow-hidden bg-slate-900 flex-col items-center justify-center p-4">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl">
         <h1 className="text-4xl font-bold mb-4 text-center text-gray-800">Cat Meme Generator</h1>
         <p className="text-center text-gray-600 mb-6">Create hilarious cat memes with just one click!</p>
         
         {meme.imageUrl && (
-          <div className="relative mb-6">
-            <img src={meme.imageUrl} alt="Random cat" className="w-full h-96 object-cover rounded-lg" />
+          <div className="relative mb-6 overflow-hidden rounded-lg" style={{maxHeight: '70vh'}}>
+            <img 
+              src={meme.imageUrl} 
+              alt="Random cat" 
+              className="w-full h-auto object-contain"
+              style={{maxHeight: '70vh'}}
+            />
             <p className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-4 text-center text-2xl font-bold">
               {customText || meme.phrase}
             </p>
@@ -94,10 +114,10 @@ function App() {
         <p className="text-center text-gray-600">
           Memes generated: <span className="font-bold">{memeCount}</span>
         </p>
-        
       </div>
     </div>
   );
 }
 
 export default App;
+
