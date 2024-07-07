@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { Boxes } from "./components/ui/background-boxes.tsx";
+import { BackgroundGradient } from "./components/ui/background-gradient.tsx"
 import {cn} from "./utils/cn.ts";
 import './index.css'; 
 
@@ -72,10 +73,11 @@ function App() {
 
   return (
     <div className="min-h-screen flex overflow-hidden bg-slate-900 flex-col items-center justify-center p-4">
+    <Boxes />
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl">
         <h1 className="text-4xl font-bold mb-4 text-center text-gray-800">Cat Meme Generator</h1>
         <p className="text-center text-gray-600 mb-6">Create hilarious cat memes with just one click!</p>
-        
+        <BackgroundGradient className = "rounded-[22px] max-w-sm p4 sm:p-10 bg-white dark:bg-zinc900">
         {meme.imageUrl && (
           <div className="relative mb-6 overflow-hidden rounded-lg" style={{maxHeight: '70vh'}}>
             <img 
@@ -114,6 +116,7 @@ function App() {
         <p className="text-center text-gray-600">
           Memes generated: <span className="font-bold">{memeCount}</span>
         </p>
+        </BackgroundGradient>
       </div>
     </div>
   );
