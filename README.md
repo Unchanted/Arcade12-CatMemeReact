@@ -9,4 +9,4 @@ Currently, two official plugins are available:
 
 ---
 
-Arcade 11
+Arcade 12
